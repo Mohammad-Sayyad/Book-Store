@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/areas/admin/views/home/_Layout.cshtml";
+}
+
+@model SigninViewModel
+
+
+
+<link rel="stylesheet" href="~/css/StyleSheet.css">
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+        
+ <form asp-action="signinconfirm" asp-controller="account">
+  <h1>Login</h1>
+  <div class="inset">
+  <p>
+    <label for="email">EMAIL ADDRESS</label>
+    <input type="text"  asp-for="username">
+    
+  </p>
+  <p>
+    <label for="password">PASSWORD</label>
+    <input type="password" asp-for="password">
+  </p>
+    <p>
+    <input type="checkbox" asp-for="rememberme" > <label for="remember" > remember me</label>
+    
+  </p>
+  <p>
+    
+    <a  id="LinkModalGetUsername" href="#"> Forgot password ? </a>
+  </p>
+  </div>
+  <p class="p-container">
+   
+    <button>submit</button>
+  </p>
+</form>
+<script>
+$(() => {
+    $(LinkModalGetUsername).click(function(event) {
+        event.preventDefault()
+        $(DivModalGetUsername).modal()
+    })
+    
+})
+</script>
+
+     <div class="form-control">
+        <div class="modal fade" id="DivModalGetUsername">
+            <form asp-action="PasswordRecoveryLevelOne">
+            <div class="modal-dialog"> 
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: yellow">
+                        <h6>Password recovery</h6>
+                    </div>
+                    <div>
+                        <label style="color:black"> Enter Username </label>
+                        <input class="form-control" name="username"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" data-dismiss="modal" type="button">Back</button>
+                        <button class="btn btn-danger" data-dismiss="modal">Submit</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>

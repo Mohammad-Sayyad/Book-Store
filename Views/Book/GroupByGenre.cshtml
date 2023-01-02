@@ -1,0 +1,37 @@
+﻿@using BookStore.Data
+
+@{
+    ViewData["Title"] = "GroupByGenre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GroupByGenre</h1>
+
+@model List<GroupByGenreViewModel>
+
+@inject DBBook db
+
+@foreach (var item in Model)
+{
+    <div class="container">
+        <div><h2>@(db.Find<Genre>(item.GenreId).Name)</h2></div>
+</div>
+<div>
+    <table>
+        @foreach (var item1 in item.Books)
+        {
+             <tr>
+            <td>@item1.Id</td>
+            <td>@item1.Name</td>
+            <td>@item1.Price</td>
+            <td>@item1.Writer</td>
+            <td>@item1.Publisher</td>
+            <td>@item1.Created</td>
+
+        </tr>
+        }
+       
+    </table>
+</div>
+}
+

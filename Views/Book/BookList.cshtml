@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "BookList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<Book>
+
+    <h1 alagin="center">Book List</h1>
+
+<link rel="stylesheet" href="~/css/list.css" />
+<form asp-action="booklist" asp-controller="book">
+
+    <table class="container table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Writer</td>
+                <td>Publisher</td>
+                <td>Genre</td>
+                <td>Price</td>
+                <td>Date</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+           {
+               <tr>
+                  <td>@item.Id</td>
+                   <td>@item.Name</td>
+                   <td>@item.Writer</td>
+                   <td>@item.Publisher</td>
+                   <td>@item.Genre.Name</td>
+                   <td>@item.Price</td>
+                   <td>@item.Created</td>
+               </tr>
+               <tr>
+                   <td></td>
+                    @foreach (var item1 in item.BookImages)
+                   {
+                       <td colspan="5">
+                          <img width="80" src="@($"data:image/jpeg;base64,{Convert.ToBase64String(item1.ImgThumbnail)}")" /> 
+                       </td>
+                   }
+               </tr>
+           }
+        </tbody>
+    </table>
+</form>
