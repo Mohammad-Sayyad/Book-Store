@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "InsertBook";
+    Layout = "~/Areas/Admin/Views/home/_Layout.cshtml";
+}
+@model BookViewModel
+@{
+    List<Genre> genres = ViewData["Genres"] as List<Genre>;
+}
+<h1 align="center">InsertBook</h1>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+ <div class="container">
+     <div class="form-control" style="background-color:cadetblue" align="center">
+        
+<form action="/admin/admin/InsertBookConfirm" 
+method="post" enctype="multipart/form-data">
+        <p>
+              Book
+             <input asp-for="Name" type="text">
+            </p>
+          <p>
+              Writer
+             <input asp-for="Writer" type="text">
+           </p>
+             <p>
+             Publisher
+              <input asp-for="Publisher" type="text">
+           </p>
+          <p>
+              Price
+              <input asp-for="Price" type="text">
+            </p>
+            <p>
+              Price
+              <input asp-for="discount" type="text">
+            </p>
+                   <p>
+                Genre
+               <select asp-for="GenreId">
+                   <option></option>
+                   @foreach (var item in genres)
+                   {
+                       <option value="@item.Id">@item.Name</option>
+                   }
+               </select>
+               </p>
+          
+            <p>
+              Date
+              <input asp-for="Created" type="datetime-local">
+           </p>
+
+           <p>
+               Image
+               <input asp-for="Img" type="file" multiple id="file1"/>
+               <div id="divimgpreview">
+
+               </div>
+           </p>
+         
+      
+         
+        <button class="btn btn-info">Add Book</button>
+        </form>
+        </div>
+         </div>
+         <script>
+
+               $(() => {
+        $(file1).change(function() {
+            for (let x of file1.files) {
+                let reader = new FileReader()
+                reader.readAsDataURL(x)
+                $(divimgpreview).html('')
+                reader.onloadend = img => {
+                    let imgtag = `<div><img width='80' height='80' style='border-radius:50%'
+                                            src='${img.target.result}'/></div>`
+                    $(divimgpreview).append(imgtag)
+                }
+            }
+        })
+    })
+    
+         </script>
+
+      
